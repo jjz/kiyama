@@ -1,0 +1,34 @@
+<div class="widget-area">
+    <div class="widget widget-search">
+        <form role="form"
+              action="http://search.aol.com/aol/search?s_it=topsearchbox.search&amp;v_t=na&amp;q=site%3Ajiangjiazhi.com+"
+              class="form-inline">
+            <div class="form-group">
+                <input id="search" type="search" placeholder="search..." class="form-control search"/>
+            </div>
+        </form>
+    </div>
+    <div class="widget widget-about">
+        <h3>姜家志</h3>
+        <p> 妙木山</p>
+        <p> 尽力了！才有资格说运气不好。</p>
+
+        <p><a href="https://github.com/jjz" target="_blank" class="contact">@Github</a></p>
+    </div>
+    <div class="widget widget-category">
+        <h3>分类</h3>
+        <ul>
+
+            {{range .cateogrys}}
+            <li class="cat-item">
+                <a href="/category/{{.Id}}">{{.Name}}</a>
+
+            </li>
+            {{end}}
+        </ul>
+    </div>
+    <div class="widget widget-tags">
+        <h3>标签</h3>
+        <div class="tagcloud"></div>
+    </div>
+</div>
