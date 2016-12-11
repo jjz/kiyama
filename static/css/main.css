@@ -100,7 +100,7 @@ body {
 .article-title {
     margin-top: 20px;
     font-size: 36px;
-    color: black;
+    color: #111111;
     border-left-style: solid;
     border-left-color: darkgreen;
     border-left-width: 6px
@@ -108,7 +108,7 @@ body {
 
 .thumbnails-article-title {
     font-size: 28px;
-    color: black;
+    color: #111111;
     border-left-style: solid;
     border-left-color: darkgreen;
     border-left-width: 6px
