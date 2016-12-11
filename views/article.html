@@ -1,18 +1,20 @@
-<div class="container">
-    <div class="row">
-        <div class="col-md-9 row-article">
-            <h1 class="article-title">{{.article.Name}} </h1>
-            <input type="hidden" value="{{.article.Id}}" class="article-id"/>
-            <div class="article-info">
-                <p>{{.article.Time}}</p>
+<article>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <h1 class="article-title">{{.article.Name}} </h1>
+                <input type="hidden" value="{{.article.Id}}" class="article-id"/>
+                <div class="article-info">
+                    <p>{{.article.Time}}</p>
+                </div>
+                <div class="article-data">{{.article.Html}}</div>
+
+
+                <div class="before-and-next cf"><a class="before-article"></a><a class="next-article"></a></div>
             </div>
-            <div class="article-data">{{.article.Html}}</div>
-
-
-            <div class="before-and-next cf"><a class="before-article"></a><a class="next-article"></a></div>
-        </div>
-        <div class="col-md-3 row-widget">
-            {{template "widget.html" .}}
+            <div class="col-md-3 row-widget">
+                {{template "widget.html" .}}
+            </div>
         </div>
     </div>
-</div>
+</article>
