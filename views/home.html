@@ -1,23 +1,23 @@
 <div class="container">
     <div class="row">
-        <div class="col-md-9">
-            <ul class="thumbnails">
-                <span id="condensed" class="condensed">
-                <i title="Condensed"
-                   class="fa fa-list-ul"></i></span>
-                {{range .articles}}
-                <li class="thumbnails-li">
-                    <div class="thumbnails-article">
-                        <a href="/article/{{.Id}}">
-                            <h2 class="article-title">{{.Name}}</h2>
-                        </a>
-                        <div class="article-info">
-                            {{.Time}}
-                        </div>
-                    </div>
-                </li>
-                {{end}}
-            </ul>
+        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+            {{range .articles}}
+            <div class="post-preview">
+                <a href="post.html">
+                    <h2 class="post-title">
+                        {{.Name}}
+                    </h2>
+                    <h3 class="post-subtitle">
+                        {{.Time}}
+                    </h3>
+                </a>
+                <p class="post-meta">由 <a href="#">jjz</a> {{.Time}}提供</p>
+            </div>
+            <hr>
+
+            {{end}}
+
             <div id="loading" style="display: none;" class="loading">加载中!</div>
             <div id="nomoreresults" style="display: none;" class="loading">没有更多内容了!</div>
             <input type="hidden" id="contentType" name="contentType" value=""/>
