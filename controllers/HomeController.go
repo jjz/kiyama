@@ -17,7 +17,6 @@ func (c *HomeController) Home() {
 	c.Layout = "layout.html"
 	c.TplName = "home.html"
 
-
 }
 
 func (c *HomeController) Article() {
