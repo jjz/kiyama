@@ -17,7 +17,7 @@ a, body {
 
 body {
     font-family: Lora, 'Times New Roman', serif;
-    font-size: 20px;
+    font-size: 18px;
     -webkit-tap-highlight-color: #0085A1
 }
 
@@ -41,6 +41,7 @@ a:focus, a:hover {
 a img:focus, a img:hover {
     cursor: zoom-in
 }
+
 
 blockquote {
     color: #777;
@@ -413,6 +414,14 @@ form .row:first-child .floating-label-form-group {
 img::selection {
     color: #fff;
     background: 0 0
+}
+
+img {
+    max-width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-bottom: 10px;
+    margin-top: 10px;
 }
 
 img::-moz-selection {
