@@ -8,6 +8,7 @@ import (
 
 type HomeController struct {
 	beego.Controller
+
 }
 
 func (c *HomeController) Home() {
@@ -15,6 +16,7 @@ func (c *HomeController) Home() {
 	c.Data["articles"] = models.GetArticleList(-1)
 	c.Layout = "layout.html"
 	c.TplName = "home.html"
+
 
 }
 

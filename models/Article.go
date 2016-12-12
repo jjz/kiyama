@@ -8,12 +8,14 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
+	"time"
 )
 
 type Article struct {
 	Id       int
 	Time     string
 	Name     string
+	Subtitle string
 	Html     template.HTML
 	Markdown string
 }
@@ -32,7 +34,7 @@ func FileToMarkdown(filePath string) (*Article) {
 	fi, _ := os.Open(filePath)
 	fileName := filepath.Base(fi.Name())
 	fileName = strings.Replace(fileName, ".md", "", 1)
-	article := &Article{Id:ArticleIndex, Time:"", Markdown:str, Name:fileName}
+	article := &Article{Id:ArticleIndex, Time:time.Now().Format("2006-01-02 15:04:05"), Markdown:str, Name:fileName}
 	article.ToSafeHtml()
 	return article
 
