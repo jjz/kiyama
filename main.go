@@ -14,9 +14,27 @@ import (
 	"kiyama/utils"
 	"os"
 	"kiyama/models"
+	"github.com/astaxie/beego/orm"
 )
 
 func main() {
+	orm.Debug = true
+	initArgs()
+	beego.Run()
+}
+
+func initArgs() {
+	args := os.Args
+	for _, v := range args {
+		if v == "-initmd" {
+			models.InitMarkdown()
+			os.Exit(0)
+		}
+	}
+
+}
+
+func iniTemplate() {
 	beego.AddTemplateEngine("ace", func(root, path string, funcs template.FuncMap) (*template.Template, error) {
 		aceOptions := &ace.Options{DynamicReload: true, FuncMap: funcs}
 		aceBasePath := filepath.Join(root, "base")
@@ -50,19 +68,5 @@ func main() {
 		return tmp, err
 
 	})
-	initArgs()
-	beego.Run()
 }
-
-func initArgs() {
-	args := os.Args
-	for _, v := range args {
-		if v == "-initmd" {
-			models.InitMarkdown()
-			os.Exit(0)
-		}
-	}
-
-}
-
 
