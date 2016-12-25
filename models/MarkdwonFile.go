@@ -18,7 +18,7 @@ func (this *MarkdownFile)ToCategory() (*Category) {
 		articles = append(articles, article)
 	}
 	CategoryIndex++
-	return &Category{Id:CategoryIndex, Name:this.DirName, Articles:articles}
+	return &Category{Id:CategoryIndex, Title:this.DirName, Articles:articles}
 
 }
 func ReadAllMarkdown(path string, dirName string) (markdownFile *MarkdownFile, err error) {

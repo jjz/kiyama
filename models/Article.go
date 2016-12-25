@@ -20,7 +20,9 @@ type Article struct {
 	View       int `orm:"default(0)"`
 	Html       template.HTML `orm:""`
 	CreateTime time.Time `orm:"auto_now_add;type(datatime)"`
-	UpdateTime time.Time `orm:"auto_now:type(datatiem)"`
+	UpdateTime time.Time `orm:"auto_now;type(datatiem)"`
+	FileName   string
+	Category   *Category `orm:"null;rel(fk)"`
 }
 
 func (article *Article)ToSafeHtml() (error) {
@@ -34,9 +36,9 @@ func FileToMarkdown(filePath string) (*Article) {
 	ArticleIndex++
 	str, _ := utils.ReadFile(filePath)
 	fi, _ := os.Open(filePath)
-	fileName := filepath.Base(fi.Name())
-	fileName = strings.Replace(fileName, ".md", "", 1)
-	article := &Article{Id:ArticleIndex, Markdown:str, Title:fileName}
+	baseFileName := filepath.Base(fi.Name())
+	fileName := strings.Replace(baseFileName, ".md", "", 1)
+	article := &Article{Id:ArticleIndex, Markdown:str, Title:fileName, FileName:baseFileName}
 	article.ToSafeHtml()
 	return article
 
@@ -46,5 +48,12 @@ func AddArticle(article *Article) (error) {
 	o := orm.NewOrm()
 	_, err := o.Insert(article)
 	return err
+
+}
+func CheckArticle(fileName string) (bool, error) {
+	o := orm.NewOrm()
+	article := new(Article)
+	count, err := o.QueryTable(article).Filter("FileName", fileName).Count()
+	return count > 0, err
 
 }

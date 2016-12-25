@@ -27,7 +27,7 @@ func initArgs() {
 	args := os.Args
 	for _, v := range args {
 		if v == "-initmd" {
-			models.InitMarkdown()
+			models.RefreshMarkdown()
 			os.Exit(0)
 		}
 	}
