@@ -68,4 +68,12 @@ func CheckArticle(fileName string) (bool, error) {
 	return count > 0, err
 
 }
+func UpdateArticleView(articleId int) (error) {
+	o := orm.NewOrm()
+	article := Article{Id:articleId}
+	o.Read(&article)
+	article.View = article.View + 1
+	_, err := o.Update(&article)
+	return err
+}
 
