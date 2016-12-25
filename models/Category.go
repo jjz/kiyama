@@ -9,8 +9,6 @@ var Categorys []*Category
 var CategoryIndex int
 var ArticleIndex int
 
-var AllArticles []*Article
-
 type Category struct {
 	Id       int
 	Title    string
@@ -46,13 +44,11 @@ func GetArticleList(categoryId int) ([]*Article) {
 }
 
 func GetArticleById(artcileId int) (*Article) {
-	for _, c := range AllArticles {
-		if c.Id == artcileId {
-			return c
-		}
-	}
+
 	return nil
 }
+
+
 func AddCategory(category *Category) (error) {
 	o := orm.NewOrm()
 	_, err := o.Insert(category)

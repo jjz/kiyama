@@ -8,22 +8,28 @@
                 <a href="/article/{{.Id}}">
 
                     <h2 class="post-title">
-                        {{.Name}}
+                        {{.Title}}
                     </h2>
                     <h3 class="post-subtitle">
                         {{.Subtitle}}
                     </h3>
                 </a>
-                <p class="post-meta"><a href="#">jjz</a>写于: {{.Time}}</p>
+                <p class="post-meta"><a href="#">jjz</a>写于: {{.CreateTime}}</p>
             </div>
             <hr>
-
             {{end}}
-
-            <div id="loading" style="display: none;" class="loading">加载中!</div>
-            <div id="nomoreresults" style="display: none;" class="loading">没有更多内容了!</div>
-            <input type="hidden" id="contentType" name="contentType" value=""/>
-            <input type="hidden" id="contentName" name="contentName" value=""/>
+            <ul class="pager">
+                {{if gt .page 0}}
+                <li class="previous">
+                    <a href="?page={{.previous}}">上一页</a>
+                </li>
+                {{end}}
+                {{if eq .hasNext true}}
+                <li class="next">
+                    <a href="?page={{.next}}">下一页</a>
+                </li>
+                {{end}}
+            </ul>
         </div>
         <div class="col-md-3">
 

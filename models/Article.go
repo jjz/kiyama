@@ -23,6 +23,16 @@ type Article struct {
 	UpdateTime time.Time `orm:"auto_now;type(datatiem)"`
 	FileName   string
 	Category   *Category `orm:"null;rel(fk)"`
+	Deleted    int8 `orm:"default(0)"`
+}
+
+func GetArticlesBypPage(page int, pageSize int) (articles [] *Article) {
+	o := orm.NewOrm()
+	article := new(Article)
+	qs := o.QueryTable(article)
+	offset := GetOffset(page, pageSize)
+	qs.Filter("Deleted", DELETED_NORMAL).Limit(pageSize, offset).OrderBy("CreateTime").All(&articles)
+	return
 }
 
 func (article *Article)ToSafeHtml() (error) {

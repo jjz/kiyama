@@ -8,6 +8,11 @@ import (
 	"fmt"
 )
 
+const (
+	PAGE = "page"
+	PAGE_SIZE=20
+)
+
 func init() {
 	mysqlStr := beego.AppConfig.String("mysql")
 	orm.RegisterDriver("mysql", orm.DRMySQL)
@@ -22,7 +27,7 @@ func RefreshMarkdown() {
 	CategoryIndex = 0
 	ArticleIndex = 0
 	Categorys = []*Category{}
-	AllArticles = []*Article{}
+
 	markdownPath := utils.MergePath(beego.AppConfig.String("markdown_dir"))
 	fileInfo, err := ReadAllMarkdown(markdownPath, "默认")
 	category := fileInfo.ToCategory()
@@ -46,7 +51,7 @@ func RefreshMarkdown() {
 	}
 	for _, c := range Categorys {
 		for _, a := range c.Articles {
-			AllArticles = append(AllArticles, a)
+
 			exist, err := CheckArticle(a.FileName)
 			if err != nil {
 				fmt.Println(err.Error())

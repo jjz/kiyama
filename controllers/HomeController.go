@@ -8,12 +8,18 @@ import (
 
 type HomeController struct {
 	beego.Controller
-
 }
 
 func (c *HomeController) Home() {
+	page, _ := c.GetInt(models.PAGE, 1)
+
+	articles := models.GetArticlesBypPage(page, models.PAGE_SIZE)
 	c.Data["cateogrys"] = models.Categorys
-	c.Data["articles"] = models.GetArticleList(-1)
+	c.Data["articles"] = articles
+	c.Data["page"] = page
+	c.Data["previous"] = page - 1
+	c.Data["hasNext"] = len(articles) >= models.PAGE_SIZE
+	c.Data["next"] = page + 1
 	c.Layout = "layout.html"
 	c.TplName = "home.html"
 
