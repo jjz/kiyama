@@ -20,6 +20,7 @@ import (
 func main() {
 	orm.Debug = true
 	initArgs()
+	beego.AddFuncMap("TimeToString", models.TimeToString)
 	beego.Run()
 }
 

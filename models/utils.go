@@ -1,5 +1,7 @@
 package models
 
+import "time"
+
 const (
 	DELETED_NORMAL=0
 	DELETED_DELETED=1
@@ -14,4 +16,7 @@ func GetOffset(page int, pageSize int) int {
 	}
 
 	return offset
+}
+func TimeToString(time time.Time )(string)  {
+	return time.Format("2006-01-02 15:04:05")
 }
