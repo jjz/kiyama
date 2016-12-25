@@ -22,6 +22,7 @@ type Article struct {
 	CreateTime time.Time `orm:"auto_now_add;type(datatime)"`
 	UpdateTime time.Time `orm:"auto_now;type(datatiem)"`
 	FileName   string
+	Md5        string
 	Category   *Category `orm:"null;rel(fk)"`
 	Deleted    int8 `orm:"default(0)"`
 }
@@ -67,3 +68,4 @@ func CheckArticle(fileName string) (bool, error) {
 	return count > 0, err
 
 }
+
