@@ -27,14 +27,16 @@
     <!-- /.container -->
 </nav>
 
-<header class="intro-header" style="background-image: url('/static/img/home-bg.jpg')">
+<!-- Page Header -->
+<!-- Set your background image for this header on the line below. -->
+<header class="intro-header" style="background-image: url('/static/img/post-bg.jpg')">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <div class="site-heading">
-                    <h1>妙木山</h1>
-                    <hr class="small">
-                    <span class="subheading">生活-修行</span>
+                <div class="post-heading">
+                    <h1>{{.Name}}</h1>
+                    <h2 class="subheading">{{.Subtitle}}</h2>
+                    <p class="meta"><a href="#">jjz</a>写于: {{.Time}}</p>
                 </div>
             </div>
         </div>
