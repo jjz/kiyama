@@ -29,9 +29,17 @@ func (c *HomeController) Article() {
 	id, _ := c.GetInt(":id", -1)
 	if id == -1 {
 		fmt.Println("id error")
+
 	}
-	c.Data["article"] = models.GetArticleById(id)
+	article, err := models.GetArticleById(id)
+	if err != nil {
+		c.Data["article"] = "没有了"
+	}
+	c.Data["article"] = article
+	c.Data["next"] = id + 1
+	c.Data["previous"] = id - 1
 	c.Data["cateogrys"] = models.Categorys
+	c.Data["id"] = id
 	c.Layout = "layout.html"
 	c.TplName = "article.html"
 }

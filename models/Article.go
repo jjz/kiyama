@@ -16,9 +16,9 @@ type Article struct {
 	Id         int
 	Title      string
 	Subtitle   string
-	Markdown   string
+	Markdown   string `orm:""`
 	View       int `orm:"default(0)"`
-	Html       template.HTML `orm:""`
+	Html       template.HTML `orm:"type(text);size(150000)"`
 	CreateTime time.Time `orm:"auto_now_add;type(datatime)"`
 	UpdateTime time.Time `orm:"auto_now;type(datatiem)"`
 	FileName   string

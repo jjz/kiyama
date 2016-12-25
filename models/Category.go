@@ -40,14 +40,14 @@ func GetArticleList(categoryId int) ([]*Article) {
 	}
 	fmt.Println("articles", articles)
 	return articles
-
 }
 
-func GetArticleById(artcileId int) (*Article) {
-
-	return nil
+func GetArticleById(artcileId int) (*Article, error) {
+	o := orm.NewOrm()
+	article := Article{Id:artcileId}
+	err := o.Read(&article)
+	return &article, err
 }
-
 
 func AddCategory(category *Category) (error) {
 	o := orm.NewOrm()
