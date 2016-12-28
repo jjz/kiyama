@@ -41,6 +41,7 @@ func (article *Article)ToSafeHtml() (error) {
 	//html := bluemonday.UGCPolicy().SanitizeBytes(unsafe)
 	article.Html = template.HTML(string(unsafe))
 	fmt.Println(article.Markdown)
+
 	return nil
 
 }

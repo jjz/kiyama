@@ -14,8 +14,8 @@
     <link rel="stylesheet" href="/static/bower_components/clean-blog/css/clean-blog.min.css">
     <link rel="icon" href="/static/img/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="/static/css/clean-blog.css">
+    <link type="text/css" rel="stylesheet" href="/static/bower_components/google-code-prettify/bin/prettify.min.css">
 
-    <script src="/static/bower_components/jquery/dist/jquery.min.js"></script>
     <title>妙木山</title>
 </head>
 <body>
@@ -26,9 +26,16 @@
 
 </div>
 </body>
+<script src="/static/bower_components/jquery/dist/jquery.min.js"></script>
 <script src="/static/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="/static/bower_components/google-code-prettify/bin/prettify.min.js"></script>
 <script src="/static/bower_components/clean-blog/js/clean-blog.min.js"></script>
+<script type="text/javascript" src="/static/bower_components/google-code-prettify/bin/prettify.min.js"></script>
+<script type="text/javascript" src="/static/bower_components/markdown/lib/markdown.js"></script>
+<script type="text/javascript">
+    html_content = markdown.toHTML({{.article.Markdown}});
+    $("#div_content").append(html_content);
+</script>
 
 <script type="text/javascript">
     var _hmt = _hmt || [];
