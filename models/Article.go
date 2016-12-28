@@ -10,18 +10,19 @@ import (
 	"strings"
 	"time"
 	"github.com/astaxie/beego/orm"
+	"fmt"
 )
 
 type Article struct {
 	Id         int
 	Title      string
 	Subtitle   string
-	Markdown   string `orm:""`
+	Markdown   string `orm:"type(text);size(150000)"`
 	View       int `orm:"default(0)"`
-	Html       template.HTML `orm:"type(text);size(150000)"`
+	Html       template.HTML `orm:"-"`
 	CreateTime time.Time `orm:"auto_now_add;type(datatime)"`
 	UpdateTime time.Time `orm:"auto_now;type(datatiem)"`
-	FileName   string
+	FilePath   string
 	Md5        string
 	Category   *Category `orm:"null;rel(fk)"`
 	Deleted    int8 `orm:"default(0)"`
@@ -40,6 +41,7 @@ func (article *Article)ToSafeHtml() (error) {
 	unsafe := blackfriday.MarkdownCommon([]byte(article.Markdown))
 	html := bluemonday.UGCPolicy().SanitizeBytes(unsafe)
 	article.Html = template.HTML(string(html))
+	fmt.Println(article.Html)
 	return nil
 
 }
@@ -49,8 +51,8 @@ func FileToMarkdown(filePath string) (*Article) {
 	fi, _ := os.Open(filePath)
 	baseFileName := filepath.Base(fi.Name())
 	fileName := strings.Replace(baseFileName, ".md", "", 1)
-	article := &Article{Id:ArticleIndex, Markdown:str, Title:fileName, FileName:baseFileName}
-	article.ToSafeHtml()
+	article := &Article{Id:ArticleIndex, Markdown:str, Title:fileName, FilePath:filePath}
+
 	return article
 
 }
@@ -64,7 +66,7 @@ func AddArticle(article *Article) (error) {
 func CheckArticle(fileName string) (bool, error) {
 	o := orm.NewOrm()
 	article := new(Article)
-	count, err := o.QueryTable(article).Filter("FileName", fileName).Count()
+	count, err := o.QueryTable(article).Filter("FilePath", fileName).Count()
 	return count > 0, err
 
 }
@@ -76,4 +78,23 @@ func UpdateArticleView(articleId int) (error) {
 	_, err := o.Update(&article)
 	return err
 }
+func UpdateArticle(filePath string, markdown string) (error) {
+	md5Str := utils.GetMd5FromFile(filePath)
+	o := orm.NewOrm()
+	article := Article{FilePath:filePath}
+	err := o.Read(&article, "FilePath")
+	if err != nil {
+		fmt.Println(err.Error())
+		return err
+
+	}
+	if md5Str != article.Md5 {
+		article.Markdown = markdown
+		article.Md5 = md5Str
+		o.Update(&article, "Markdown", "Md5")
+	}
+	return nil
+
+}
+
 

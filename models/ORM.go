@@ -10,7 +10,7 @@ import (
 
 const (
 	PAGE = "page"
-	PAGE_SIZE=20
+	PAGE_SIZE = 20
 )
 
 func init() {
@@ -52,7 +52,7 @@ func RefreshMarkdown() {
 	for _, c := range Categorys {
 		for _, a := range c.Articles {
 
-			exist, err := CheckArticle(a.FileName)
+			exist, err := CheckArticle(a.FilePath)
 			if err != nil {
 				fmt.Println(err.Error())
 			}
@@ -63,7 +63,8 @@ func RefreshMarkdown() {
 				}
 
 			} else {
-				fmt.Println(a.FileName, "exist")
+				UpdateArticle(a.FilePath, a.Markdown)
+				fmt.Println(a.FilePath, "exist")
 			}
 		}
 	}

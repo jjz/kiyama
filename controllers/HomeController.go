@@ -32,10 +32,13 @@ func (c *HomeController) Article() {
 
 	}
 	article, err := models.GetArticleById(id)
+
 	models.UpdateArticleView(id)
 	if err != nil {
 		c.Data["article"] = "没有了"
 	}
+	article.ToSafeHtml()
+	fmt.Println(article.Html)
 	c.Data["article"] = article
 	c.Data["next"] = id + 1
 	c.Data["previous"] = id - 1

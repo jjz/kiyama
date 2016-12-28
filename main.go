@@ -31,8 +31,17 @@ func initArgs() {
 			models.RefreshMarkdown()
 			os.Exit(0)
 		}
+		if v=="-testArticle"{
+			testArticle()
+			os.Exit(0)
+
+		}
 	}
 
+}
+func testArticle()  {
+	articlePath:=utils.MergePath("markdown/CentOS 安装 Jenkins.md")
+	models.FileToMarkdown(articlePath)
 }
 
 func iniTemplate() {

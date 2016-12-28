@@ -7,6 +7,8 @@ import (
 	"os/exec"
 	"strings"
 	"fmt"
+	"crypto/md5"
+	"io"
 )
 
 func ReadFile(path string) (str string, err error) {
@@ -49,4 +51,14 @@ func MergePath(args ...string) string {
 		}
 	}
 	return approot
+}
+func GetMd5FromFile(filePath string) (string) {
+	file, err := os.Open(filePath)
+	if err != nil {
+		return ""
+	}
+	md5h := md5.New()
+	io.Copy(md5h, file)
+	return fmt.Sprintf("%x", md5h.Sum([]byte("")))
+
 }
