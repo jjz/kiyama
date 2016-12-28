@@ -1,7 +1,6 @@
 package models
 
 import (
-	"github.com/microcosm-cc/bluemonday"
 	"github.com/russross/blackfriday"
 	"html/template"
 	"kiyama/utils"
@@ -38,10 +37,10 @@ func GetArticlesBypPage(page int, pageSize int) (articles [] *Article) {
 }
 
 func (article *Article)ToSafeHtml() (error) {
-	unsafe := blackfriday.MarkdownCommon([]byte(article.Markdown))
-	html := bluemonday.UGCPolicy().SanitizeBytes(unsafe)
-	article.Html = template.HTML(string(html))
-	fmt.Println(article.Html)
+	unsafe := blackfriday.MarkdownBasic([]byte(article.Markdown))
+	//html := bluemonday.UGCPolicy().SanitizeBytes(unsafe)
+	article.Html = template.HTML(string(unsafe))
+	fmt.Println(article.Markdown)
 	return nil
 
 }
@@ -52,7 +51,6 @@ func FileToMarkdown(filePath string) (*Article) {
 	baseFileName := filepath.Base(fi.Name())
 	fileName := strings.Replace(baseFileName, ".md", "", 1)
 	article := &Article{Id:ArticleIndex, Markdown:str, Title:fileName, FilePath:filePath}
-
 	return article
 
 }
@@ -75,7 +73,7 @@ func UpdateArticleView(articleId int) (error) {
 	article := Article{Id:articleId}
 	o.Read(&article)
 	article.View = article.View + 1
-	_, err := o.Update(&article)
+	_, err := o.Update(&article,"View")
 	return err
 }
 func UpdateArticle(filePath string, markdown string) (error) {

@@ -1,3 +1,4 @@
+<link type="text/css" rel="stylesheet" href="/static/bower_components/google-code-prettify/bin/prettify.min.css">
 {{template "article-header.html" .article}}
 <article>
     <div class="container">
@@ -5,7 +6,7 @@
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
 
                 <input type="hidden" value="{{.article.Id}}" class="article-id"/>
-                {{.article.Html}}
+                <div id="div_content"></div>
                 <div class="before-and-next cf center">
                     <a href="/article/{{.previous}}" class="before-article">上一篇</a>
                     <a href="/article/{{.next}}" class="next-article">下一篇</a>
@@ -15,3 +16,10 @@
         </div>
     </div>
 </article>
+
+<script type="text/javascript" src="/static/bower_components/markdown/lib/markdown.js"></script>
+<script type="text/javascript">
+    html_content = markdown.toHTML({{.article.Markdown}});
+    $("#div_content").append(html_content);
+</script>
+<script type="text/javascript" src="/static/bower_components/google-code-prettify/bin/prettify.min.js"></script>

@@ -37,8 +37,7 @@ func (c *HomeController) Article() {
 	if err != nil {
 		c.Data["article"] = "没有了"
 	}
-	article.ToSafeHtml()
-	fmt.Println(article.Html)
+	//article.ToSafeHtml()
 	c.Data["article"] = article
 	c.Data["next"] = id + 1
 	c.Data["previous"] = id - 1
