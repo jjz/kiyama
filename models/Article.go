@@ -43,7 +43,6 @@ func (article *Article)ToSafeHtml() (error) {
 	fmt.Println(article.Markdown)
 
 	return nil
-
 }
 func FileToMarkdown(filePath string) (*Article) {
 	ArticleIndex++
@@ -74,23 +73,29 @@ func UpdateArticleView(articleId int) (error) {
 	article := Article{Id:articleId}
 	o.Read(&article)
 	article.View = article.View + 1
-	_, err := o.Update(&article,"View")
+	_, err := o.Update(&article, "View")
 	return err
 }
 func UpdateArticle(filePath string, markdown string) (error) {
 	md5Str := utils.GetMd5FromFile(filePath)
+	fmt.Println(md5Str)
 	o := orm.NewOrm()
 	article := Article{FilePath:filePath}
+
 	err := o.Read(&article, "FilePath")
+	fmt.Println(article.Md5)
 	if err != nil {
 		fmt.Println(err.Error())
 		return err
 
 	}
+	fmt.Println(md5Str, article.Md5)
 	if md5Str != article.Md5 {
 		article.Markdown = markdown
 		article.Md5 = md5Str
+
 		o.Update(&article, "Markdown", "Md5")
+		fmt.Println("update:", article.Md5)
 	}
 	return nil
 

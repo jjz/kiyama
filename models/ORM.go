@@ -47,7 +47,6 @@ func RefreshMarkdown() {
 		if !exist {
 			AddCategory(category)
 		}
-
 	}
 	for _, c := range Categorys {
 		for _, a := range c.Articles {
