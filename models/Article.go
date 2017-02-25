@@ -94,7 +94,6 @@ func UpdateArticle(filePath string, markdown string) (error) {
 	if md5Str != article.Md5 {
 		article.Markdown = markdown
 		article.Md5 = md5Str
-
 		o.Update(&article, "Markdown", "Md5")
 		fmt.Println("update:", article.Md5)
 	}
