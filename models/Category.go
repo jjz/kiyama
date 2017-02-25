@@ -1,7 +1,6 @@
 package models
 
 import (
-	"fmt"
 	"github.com/astaxie/beego/orm"
 )
 
@@ -38,7 +37,6 @@ func GetArticleList(categoryId int) ([]*Article) {
 		}
 
 	}
-	fmt.Println("articles", articles)
 	return articles
 }
 

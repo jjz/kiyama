@@ -50,7 +50,8 @@ func FileToMarkdown(filePath string) (*Article) {
 	fi, _ := os.Open(filePath)
 	baseFileName := filepath.Base(fi.Name())
 	fileName := strings.Replace(baseFileName, ".md", "", 1)
-	article := &Article{Id:ArticleIndex, Markdown:str, Title:fileName, FilePath:filePath}
+	fmt.Println("title:",fileName)
+	article := &Article{ Markdown:str, Title:fileName, FilePath:filePath}
 	return article
 
 }

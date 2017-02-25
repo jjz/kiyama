@@ -31,6 +31,7 @@ func RefreshMarkdown() {
 	markdownPath := utils.MergePath(beego.AppConfig.String("markdown_dir"))
 	fileInfo, err := ReadAllMarkdown(markdownPath, "默认")
 	category := fileInfo.ToCategory()
+
 	Categorys = append(Categorys, category)
 	if err != nil {
 		fmt.Println("err", err)
@@ -48,6 +49,7 @@ func RefreshMarkdown() {
 			AddCategory(category)
 		}
 	}
+	//todo 遍历所有已经存在的文章，不存在的需要删除
 	for _, c := range Categorys {
 		for _, a := range c.Articles {
 
@@ -56,6 +58,7 @@ func RefreshMarkdown() {
 				fmt.Println(err.Error())
 			}
 			if !exist {
+
 				err := AddArticle(a)
 				if err != nil {
 					fmt.Println(err.Error())
@@ -63,7 +66,7 @@ func RefreshMarkdown() {
 
 			} else {
 				UpdateArticle(a.FilePath, a.Markdown)
-				fmt.Println(a.FilePath, "exist")
+
 			}
 		}
 	}
