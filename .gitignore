@@ -8,3 +8,4 @@ update.sh
 kiyama
 *.gz
 swagger
+.DS_Store
