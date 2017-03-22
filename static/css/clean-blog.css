@@ -16,8 +16,8 @@ a, body {
 }
 
 body {
-    font-family: Lora, 'Times New Roman', serif;
-    font-size: 18px;
+    font-family: Songti SC,serif;
+    font-size: 16px;
     -webkit-tap-highlight-color: #0085A1
 }
 
@@ -44,10 +44,11 @@ a img:focus, a img:hover {
 
 blockquote {
     color: #777;
-    font-style: italic;
+    font-style:normal;
     padding: 10px 15px;
     border-left: 4px solid #999999;
     background-color: whitesmoke;
+    font-size: 16px;
 
 }
 
