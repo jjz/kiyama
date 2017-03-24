@@ -32,7 +32,7 @@ func GetArticlesBypPage(page int, pageSize int) (articles [] *Article) {
 	article := new(Article)
 	qs := o.QueryTable(article)
 	offset := GetOffset(page, pageSize)
-	qs.Filter("Deleted", DELETED_NORMAL).Limit(pageSize, offset).OrderBy("-CreateTime").All(&articles)
+	qs.Filter("Deleted", DELETED_NORMAL).Limit(pageSize, offset).OrderBy("-UpdateTime").All(&articles)
 	return
 }
 
