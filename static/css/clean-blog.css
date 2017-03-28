@@ -27,7 +27,8 @@ body {
 
 p {
     line-height: 1.5;
-    margin: 30px 0
+    margin: 30px 0;
+    word-break: break-word;
 }
 
 p a {
@@ -38,7 +39,7 @@ a:focus, a:hover {
     color: #0085A1
 }
 
-code {
+p code,li code,td code {
     color: #657b83;
     background-color: #ededed;
     border-radius: 4px;
