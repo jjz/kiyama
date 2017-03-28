@@ -16,7 +16,7 @@ a, body {
 }
 
 body {
-    font-family: Songti SC,serif;
+    font-family: Songti SC, serif;
     font-size: 16px;
     -webkit-tap-highlight-color: #0085A1
 }
@@ -38,13 +38,25 @@ a:focus, a:hover {
     color: #0085A1
 }
 
+code {
+    color: #657b83;
+    background-color: #ededed;
+    border-radius: 4px;
+    border: none;
+    font-size: 13px;
+    white-space: pre-wrap;
+    padding: 3px 4px;
+    font-family: Menlo, Monaco, Consolas, Courier New, monospace;
+
+}
+
 a img:focus, a img:hover {
     cursor: zoom-in
 }
 
 blockquote {
     color: #777;
-    font-style:normal;
+    font-style: normal;
     padding: 10px 15px;
     border-left: 4px solid #999999;
     background-color: whitesmoke;

@@ -1,7 +1,6 @@
 package models
 
 import (
-	"github.com/russross/blackfriday"
 	"html/template"
 	"kiyama/utils"
 	"os"
@@ -10,6 +9,7 @@ import (
 	"time"
 	"github.com/astaxie/beego/orm"
 	"fmt"
+	"github.com/golang-commonmark/markdown"
 )
 
 type Article struct {
@@ -27,6 +27,7 @@ type Article struct {
 	Deleted    int8 `orm:"default(0)"`
 }
 
+
 func GetArticlesBypPage(page int, pageSize int) (articles [] *Article) {
 	o := orm.NewOrm()
 	article := new(Article)
@@ -37,9 +38,10 @@ func GetArticlesBypPage(page int, pageSize int) (articles [] *Article) {
 }
 
 func (article *Article)ToSafeHtml() (error) {
-	unsafe := blackfriday.MarkdownBasic([]byte(article.Markdown))
+	//unsafe := blackfriday.MarkdownBasic([]byte(article.Markdown))
 	//html := bluemonday.UGCPolicy().SanitizeBytes(unsafe)
-	article.Html = template.HTML(string(unsafe))
+	md := markdown.New(markdown.XHTMLOutput(true), markdown.Nofollow(true))
+	article.Html = template.HTML(md.RenderToString([]byte(article.Markdown)))
 	fmt.Println(article.Markdown)
 
 	return nil

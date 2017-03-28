@@ -32,6 +32,7 @@ func (c *HomeController) Article() {
 
 	}
 	article, err := models.GetArticleById(id)
+	article.ToSafeHtml()
 
 	models.UpdateArticleView(id)
 	if err != nil {

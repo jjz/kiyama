@@ -6,7 +6,7 @@
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
 
                 <input type="hidden" value="{{.article.Id}}" class="article-id"/>
-                <div id="div_content"></div>
+                <div id="div_content">{{.article.Html}}</div>
                 <div class="before-and-next cf center">
                     <a href="/article/{{.previous}}" class="before-article">上一篇</a>
                     <a href="/article/{{.next}}" class="next-article">下一篇</a>
