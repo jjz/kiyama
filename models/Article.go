@@ -50,8 +50,8 @@ func FileToMarkdown(filePath string) (*Article) {
 	fi, _ := os.Open(filePath)
 	baseFileName := filepath.Base(fi.Name())
 	fileName := strings.Replace(baseFileName, ".md", "", 1)
-	fmt.Println("title:",fileName)
-	article := &Article{ Markdown:str, Title:fileName, FilePath:filePath}
+	fmt.Println("title:", fileName)
+	article := &Article{Markdown:str, Title:fileName, FilePath:filePath}
 	return article
 
 }
@@ -79,7 +79,6 @@ func UpdateArticleView(articleId int) (error) {
 }
 func UpdateArticle(filePath string, markdown string) (error) {
 	md5Str := utils.GetMd5FromFile(filePath)
-	fmt.Println(md5Str)
 	o := orm.NewOrm()
 	article := Article{FilePath:filePath}
 
@@ -90,11 +89,12 @@ func UpdateArticle(filePath string, markdown string) (error) {
 		return err
 
 	}
-	fmt.Println(md5Str, article.Md5)
 	if md5Str != article.Md5 {
 		article.Markdown = markdown
 		article.Md5 = md5Str
-		o.Update(&article, "Markdown", "Md5")
+		article.UpdateTime = time.Now()
+		o.Update(&article, "Markdown", "Md5","UpdateTime")
+
 		fmt.Println("update:", article.Md5)
 	}
 	return nil
