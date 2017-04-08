@@ -11,6 +11,8 @@ import (
 const (
 	PAGE = "page"
 	PAGE_SIZE = 20
+	STATUS_ENABLE = 0
+	STATUS_DISABLE = 1
 )
 
 func init() {
@@ -33,6 +35,7 @@ func RefreshMarkdown() {
 	category := fileInfo.ToCategory()
 
 	Categorys = append(Categorys, category)
+	UpdateAllArticleDeleted()
 	if err != nil {
 		fmt.Println("err", err)
 		return
@@ -52,13 +55,12 @@ func RefreshMarkdown() {
 	//todo 遍历所有已经存在的文章，不存在的需要删除
 	for _, c := range Categorys {
 		for _, a := range c.Articles {
-
-			exist, err := CheckArticle(a.FilePath)
+			article, err := CheckArticleWithPath(a.FilePath)
+			exist := article != nil
 			if err != nil {
 				fmt.Println(err.Error())
 			}
 			if !exist {
-
 				err := AddArticle(a)
 				if err != nil {
 					fmt.Println(err.Error())

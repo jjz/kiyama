@@ -29,11 +29,9 @@ func (c *HomeController) Article() {
 	id, _ := c.GetInt(":id", -1)
 	if id == -1 {
 		fmt.Println("id error")
-
 	}
 	article, err := models.GetArticleById(id)
 	article.ToSafeHtml()
-
 	models.UpdateArticleView(id)
 	if err != nil {
 		c.Data["article"] = "没有了"
